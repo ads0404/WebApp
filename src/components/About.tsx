@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const AboutSection = styled.section`
@@ -28,12 +27,6 @@ const ContentBox = styled.div`
   background-color: rgba(255, 255, 255, 0.3); /* White with 80% opacity */
 `;
 
-const AboutImage = styled.img`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  margin-bottom: 2rem;
-`;
 
 const AboutText = styled.p`
   color: #333333;
@@ -49,12 +42,6 @@ const SectionTitle = styled.h3`
   margin-bottom: 1.5rem;
 `;
 
-const Title = styled.h2`
-  color: #333333;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
-`;
 
 const About = () => (
   <AboutSection id="about">

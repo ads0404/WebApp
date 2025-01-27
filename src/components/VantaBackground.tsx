@@ -1,6 +1,5 @@
 // src/components/VantaBackground.tsx
-import React, { useEffect, useRef } from "react";
-import * as THREE from "three";
+import  { useEffect, useRef } from "react";
 import WAVES from "vanta/dist/vanta.waves.min";
 import "./VantaBackground.css";
 
