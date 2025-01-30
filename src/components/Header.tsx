@@ -1,129 +1,115 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { FaGithub, FaLinkedin, FaEnvelope, FaLaptopCode, FaFolder } from 'react-icons/fa';
 
-// Header wrapper styles
-const HeaderWrapper = styled.header`
+const Sidebar = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  padding: 1rem 2rem;
-  background-color: transparent;
+  height: 100%;
+  width: 60px;
+  background-color: rgba(100, 100, 100, 0.1);
   color: white;
-  z-index: 1000;
   display: flex;
-  justify-content: space-between; /* Align items to the left and right */
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-`;
-
-// Hamburger icon styles
-const HamburgerIcon = styled.div`
-  display: block;
-  cursor: pointer;
-  width: 30px;
-  height: 21px;
-  position: relative;
-  z-index: 1100;
-  transition: all 0.3s ease;
-  
-  & span {
-    position: absolute;
-    height: 4px;
-    width: 100%;
-    background: white;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-  }
-
-  & span:nth-child(1) {
-    top: 0;
-  }
-
-  & span:nth-child(2) {
-    top: 8px;
-  }
-
-  & span:nth-child(3) {
-    top: 16px;
-  }
-
-  &.active span:nth-child(1) {
-    top: 8px;
-    transform: rotate(45deg);
-  }
-
-  &.active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  &.active span:nth-child(3) {
-    top: 8px;
-    transform: rotate(-45deg);
-  }
-`;
-
-// NavLinks container, should be shown when hamburger is clicked
-const NavLinks = styled.nav<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')}; /* Show when open, hide when closed */
-  gap: 2rem;
-  justify-content: center; /* Center the links */
-  align-items: center;
-  padding-left: 0;
-  margin: 0;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-`;
-
-// Individual Link styles
-const Link = styled.a`
-  text-decoration: none;
-  color: #ecf0f1;
-  font-size: 1.25rem;
-  font-weight: 600;
-  padding: 0.75rem 1.5rem;
-  transition: color 0.3s ease, transform 0.3s ease;
+  padding-top: 1rem;
+  box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: background-color 0.3s ease;
 
   &:hover {
-    color: #f39c12;
-    transform: translateY(-2px);
+    background-color: rgba(0, 0, 0, 0.1);
   }
+`;
+
+const Icon = styled.div`
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+  color: #ecf0f1;
+
+  &:hover {
+    transform: translateY(-5px);
+    color: #f39c12;
+  }
+`;
+
+const NavbarLinks = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+const SocialIcons = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
 `;
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false); // State to manage hamburger menu
-
-  const toggleMenu = () => {
-    setIsOpen((prev) => !prev); // Toggle the menu open/close state
-  };
-
-  const scrollToSection = (sectionId: string, event: React.MouseEvent) => {
-    event.preventDefault(); // Prevent default anchor behavior
-
-    const target = document.getElementById(sectionId);
+  // Smooth scroll function
+  const handleScroll = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, targetId: string) => {
+    event.preventDefault();  // Prevent default anchor click behavior
+    const target = document.getElementById(targetId);
     if (target) {
-      window.scrollTo({
-        top: target.offsetTop - 100, // Adjust based on header height
+      const offset = 50; // Adjust this value as needed
+  
+      // First, scroll the target element into view
+      target.scrollIntoView({
         behavior: 'smooth',
+        block: 'start',  // Align at the top of the target element
       });
+  
+      // After the scroll, adjust by offset
+      setTimeout(() => {
+        window.scrollBy(0, -offset);
+      }, 300);  // Delay to ensure the scrollIntoView has completed
     }
   };
+  
 
   return (
-    <HeaderWrapper>
-      <HamburgerIcon className={isOpen ? 'active' : ''} onClick={toggleMenu}>
-        <span />
-        <span />
-        <span />
-      </HamburgerIcon>
-      <NavLinks isOpen={isOpen}>
-        <Link href="#about" onClick={(e) => scrollToSection('about', e)}>About</Link>
-        <Link href="#projects" onClick={(e) => scrollToSection('projects', e)}>Projects</Link>
-        <Link href="#contact" onClick={(e) => scrollToSection('contact', e)}>Contact</Link>
-      </NavLinks>
-    </HeaderWrapper>
+    <Sidebar>
+      <NavbarLinks>
+        {/* Link to About Section */}
+        <a href="#about-me" onClick={(e) => handleScroll(e, 'about-me')}>
+          <Icon>
+            <FaLaptopCode />
+          </Icon>
+        </a>
+
+        {/* Link to Projects Section */}
+        <a href="#projects" onClick={(e) => handleScroll(e, 'projects')}>
+          <Icon>
+            <FaFolder />
+          </Icon>
+        </a>
+
+        {/* Link to Contact Section */}
+        <a href="#contact" onClick={(e) => handleScroll(e, 'contact')}>
+          <Icon>
+            <FaEnvelope />
+          </Icon>
+        </a>
+      </NavbarLinks>
+
+      <SocialIcons>
+        <a href="https://github.com/ads0404" target="_blank" rel="noopener noreferrer">
+          <Icon>
+            <FaGithub />
+          </Icon>
+        </a>
+        <a href="https://www.linkedin.com/in/alex-stewart-646963347/" target="_blank" rel="noopener noreferrer">
+          <Icon>
+            <FaLinkedin />
+          </Icon>
+        </a>
+      </SocialIcons>
+    </Sidebar>
   );
 };
 

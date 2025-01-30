@@ -1,0 +1,41 @@
+.down-arrow {
+  position: absolute;
+  bottom: 50px; /* Adjust to move it higher or lower */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5rem; /* Adjust size */
+  color: white; /* Match text color */
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-in-out forwards, bounce 1.5s infinite ease-in-out;
+}
+
+/* Fade in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Bouncing effect */
+@keyframes bounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -10px);
+  }
+}
+
+/* Ensure it fades out with the intro screen */
+.intro-screen.hidden .down-arrow {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+.intro-screen h1, .intro-screen p {
+  font-family: 'Roboto', sans-serif; /* or any desired font */
+  font-size: 1.5rem;
+}

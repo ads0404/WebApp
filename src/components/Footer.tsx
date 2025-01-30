@@ -1,5 +1,4 @@
 // src/components/Footer.tsx
-import React from 'react';
 import styled from 'styled-components';
 
 const FooterWrapper = styled.footer`
@@ -33,9 +32,9 @@ const FooterLink = styled.a`
 
 const Footer = () => (
   <FooterWrapper>
-    <p>&copy; Alex Stewart | All rights reserved</p>
+    <p> <br></br> Page Produced from scratch using AWS EC2, React, HTML/CSS, Typescript and Bootstrap.</p>
     <FooterLinks>
-      Connect with me: 
+    &copy; Alex Stewart | Connect with me:
       <FooterLink href="https://www.linkedin.com/in/alex-stewart-646963347/" target="_blank" rel="noopener noreferrer"> LinkedIn </FooterLink>
       |
       <FooterLink href="https://github.com/ads0404" target="_blank" rel="noopener noreferrer"> GitHub</FooterLink>

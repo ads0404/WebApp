@@ -1,4 +1,4 @@
-declare module 'vanta/dist/vanta.waves.min' {
+declare module 'vanta/dist/vanta.fog.min' {
     const value: any;
     export default value;
   }

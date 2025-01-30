@@ -1,4 +1,3 @@
-// src/components/Contact.tsx
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -6,6 +5,8 @@ const ContactSection = styled.section`
   padding: 4rem 2rem;
   background-color: transparent;
   text-align: center;
+  padding-top: 20rem;
+  font-family: 'Lato', sans-serif; /* Apply Lato font for the Contact section */
 `;
 
 const Form = styled.form`
@@ -15,6 +16,7 @@ const Form = styled.form`
   justify-content: center;
   max-width: 400px;  /* Limit the width of the form */
   margin: 0 auto;  /* Center the form on the page */
+  font-family: 'Lato', sans-serif; /* Apply Lato font for the form */
 `;
 
 const Input = styled.input`
@@ -70,6 +72,7 @@ const Button = styled.button`
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-top: 1rem;
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font to the button */
 
   &:hover {
     background-color: #1558b0;  /* Darker blue on hover */
@@ -79,6 +82,13 @@ const Button = styled.button`
     outline: none;
     box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.3);  /* Soft glow effect */
   }
+`;
+
+const Header = styled.h2`
+  font-family: 'Montserrat', sans-serif; /* Apply Montserrat font for the header */
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #FFFFFF;
 `;
 
 const Contact = () => {
@@ -97,7 +107,7 @@ const Contact = () => {
 
   return (
     <ContactSection id="contact">
-      <h2 style={{ color: '#333333', fontSize: '2.5rem', marginBottom: '2rem' }}>Contact Me</h2>
+      <Header>Contact Me</Header>  {/* Use Header styled-component here */}
       <Form action="https://formspree.io/f/mrbeevop" method="POST">
         <label style={{ width: '100%' }}>
           <Input
