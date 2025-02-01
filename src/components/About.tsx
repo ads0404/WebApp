@@ -1,193 +1,63 @@
-import { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';  // Import framer-motion for animation
+import { useEffect, useState } from "react";
+import "./About.css"; // Ensure you have proper styling for the page
+import image1 from "../images/image1.jpeg";
+import image2 from "../images/image2.jpeg";
+import image3 from "../images/image3.jpeg";
+import image4 from "../images/image4.jpeg";
 
-// Type for content item
-interface ContentItem {
-  title: string;
-  text: string[];
-}
-
-// Section container with flex layout
-const AboutSection = styled.section`
-  padding: 4rem 2rem;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding-top: 10rem;  /* Adjusted for better spacing */
-  padding-bottom: 10rem;
-  @media (max-width: 768px) {
-    padding: 2rem 1rem;
-  }
-`;
-
-// Wrapper for content display
-const ContentWrapper = styled.div`
-  width: 60%;
-  max-width: 800px;
-  text-align: left;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 3rem;  /* Space for button navigation */
-
-  @media (max-width: 768px) {
-    max-width: 90%;
-  }
-`;
-
-// Section title styling
-const SectionTitle = styled.h3`
-  color: rgb(255, 255, 255);
-  font-size: 2.2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  font-weight: bold;
-  text-transform: uppercase;
-
-  @media (max-width: 768px) {
-    font-size: 1.8rem;
-  }
-`;
-
-// Bullet point list styling
-const BulletList = styled.ul`
-  color: rgb(202, 202, 202);
-  font-size: 0.9rem;
-  margin: 0 auto 2rem;
-  line-height: 1.8;
-  max-width: 600px;
-  list-style-type: disc;
-  padding-left: 20px;
-  font-family: 'Roboto', sans-serif; /* or any desired font */
-
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
-  }
-`;
-
-// Individual bullet point
-const BulletItem = styled.li`
-  margin-bottom: 1.2rem;
-
-  @media (max-width: 768px) {
-    margin-bottom: 1rem;
-  }
-`;
-
-// Navigation buttons container (Center vertically)
-const NavButtons = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;  /* Ensures the buttons are vertically centered */
-  width: 100%;
-  max-width: 60rem;
-  margin-top: 3rem; /* Added spacing between content and buttons */
-  padding: 0 2rem;
-  transform: translateY(-16rem); /* Move buttons up by 6rem */
-`;
-
-const Button = styled.button`
-  background: none;
-  border: 2px solid #fff;
-  color: #fff;
-  font-size: 1rem;
-  padding: 1rem 2rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  transform: scale(1);
-  
-  &:hover {
-    background-color: #fff;
-    color: #1a73e8;
-    transform: scale(1.1);  /* Slight scaling effect on hover */
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-    padding: 1rem 1.5rem;
-  }
-`;
-
-// Motion div for animated transitions
-const AnimatedContent = motion.div;
+const images = [image1, image2, image3, image4];
 
 const About = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const contentWrapperRef = useRef<HTMLDivElement | null>(null);  // UseRef for div to manage size
+  const [scrolledImages, setScrolledImages] = useState<number[]>([]);
 
-  const content: ContentItem[] = [
-    {
-      title: "About Me",
-      text: [
-        "Passionate developer with a focus on clean, efficient code.",
-        "Specialized in crafting high-performance web applications using React, TypeScript, and the latest web technologies.",
-        "Experienced in AWS, database management, and customer requirements gathering.",
-        "Strong advocate for user-centered design and dynamic web development."
-      ]
-    },
-    {
-      title: "Internship with Ako Aotearoa",
-      text: [
-        "Completed a 300-hour internship focused on AI foundation development.",
-        "Contributed to the creation of a bridging learner tool for grammar learning.",
-        "Worked with cutting-edge technologies, particularly in educational tech.",
-        "Gained hands-on experience applying my skills to real-world projects."
-      ]
-    },
-    {
-      title: "Freelance Developer at Nomino AI",
-      text: [
-        "Optimized code solutions for improved efficiency and profitability.",
-        "Collaborated with skilled developers to deliver high-quality solutions.",
-        "Handled client requirements and ensured seamless project delivery.",
-        "Developed strong skills in client interaction and understanding project goals."
-      ]
-    }
-  ];
+  // Function to handle scroll effect
+  const handleScroll = () => {
+    const scrolledPositions: number[] = [];
 
-  const nextSection = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % content.length);
+    // Get all images and their positions
+    const imageElements = document.querySelectorAll(".image-item");
+    imageElements.forEach((img,) => {
+      const rect = img.getBoundingClientRect();
+      const imgCenter = rect.top + rect.height / 2;
+      const windowCenter = window.innerHeight / 2;
+
+      // Determine if the image is in the center
+      const distanceFromCenter = Math.abs(imgCenter - windowCenter);
+      scrolledPositions.push(distanceFromCenter);
+    });
+
+    setScrolledImages(scrolledPositions);
   };
 
-  const prevSection = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? content.length - 1 : prevIndex - 1
-    );
-  };
-
-  // Ensuring the ContentWrapper stays the same size
   useEffect(() => {
-    if (contentWrapperRef.current) {
-      const currentHeight = contentWrapperRef.current.offsetHeight;
-      contentWrapperRef.current.style.height = `${currentHeight}px`;
-    }
-  }, [currentIndex]); // Re-run when the content changes
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <AboutSection id="about-me">
-      <ContentWrapper ref={contentWrapperRef}>
-        <AnimatedContent
-          key={currentIndex}  // Use key to trigger a re-mount on index change
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.6 }}  // Transition duration
-        >
-          <SectionTitle>{content[currentIndex].title}</SectionTitle>
-          <BulletList>
-            {content[currentIndex].text.map((point, idx) => (
-              <BulletItem key={idx}>{point}</BulletItem>
-            ))}
-          </BulletList>
-        </AnimatedContent>
-      </ContentWrapper>
-      <NavButtons>
-        <Button onClick={prevSection}>&lt;</Button>
-        <Button onClick={nextSection}>&gt;</Button>
-      </NavButtons>
-    </AboutSection>
+    <div className="about-wrapper" id="about-me">
+      <div className="about-container">
+        {/* About Me Card */}
+        <div className="about-card">
+          <h2>About Me</h2>
+          <p>I have a genuine passion for learning, and I enjoy creating new and unique ways to create visually pleasing user-interfaces.</p>
+        </div>
+
+        {/* Images Section */}
+        <div className="image-section">
+          {images.map((img, index) => {
+            const scale = 1 - (scrolledImages[index] ?? 0) / 1000; // Adjust scale factor
+            const transformStyle = `scale(${Math.max(0.5, scale)})`;
+
+            return (
+              <div key={index} className="image-item" style={{ transform: transformStyle }}>
+                <img src={img} alt={`Image ${index + 1}`} />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 };
 

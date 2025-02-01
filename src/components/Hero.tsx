@@ -58,7 +58,7 @@ const Paragraph = styled.p`
   font-family: 'Roboto', sans-serif;  /* Use Roboto for paragraph text */
 
   @media (max-width: 768px) {
-    font-size: 1.2rem;
+    font-size: 0.8rem;
   }
 `;
 

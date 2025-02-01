@@ -1,0 +1,146 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+  
+  /* Wrapper for the entire page */
+  .about-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20rem; /* Adds extra space below the image section */
+  }
+  
+  /* Container holding the About card and images section */
+  .about-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px; /* Gap between the About card and images section */
+    width: 100%;
+    max-width: 1200px; /* Limit the container width */
+    padding: 0 20px;
+  }
+  
+  /* About Me card styling */
+  .about-card {
+    position: sticky;
+    top: 23rem; /* Adjust position */
+    width: 300px;
+    padding: 20px;
+    background-color: rgba(58, 58, 58, 0.3); /* Dark grey with 70% opacity */
+    box-shadow: 0 0 20px rgba(131, 131, 131, 0.3); /* Soft white fading border */
+    border-radius: 8px;
+    backdrop-filter: blur(5px); /* Slight blur to blend into background */
+    color: aliceblue;
+}
+  
+  .about-card h2 {
+    margin-bottom: 10px;
+  }
+  
+  /* Image section that scrolls through */
+  .image-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20rem; /* Increased space between images */
+    max-width: 700px;
+    width: 100%;
+    align-items: center;
+    margin-top: 30rem; /* Add margin to push the images down */
+    margin-bottom: 5rem;
+    margin-bottom: 150px;
+  }
+  
+  
+  .image-item {
+    width: 100%;
+    transition: transform 0.2s ease; /* Smooth scaling transition */
+  }
+  
+  .image-item img {
+    width: 40rem; /* Ensures consistent size */
+    height: 40rem;
+    object-fit: cover; /* Ensures the image fills the circular space properly */
+    border-radius: 2%; /* Makes the image circular */
+    box-shadow: 0 0px 30px 0px rgba(0, 0, 0, 1) /* Slightly deeper shadow for effect */
+  }
+  
+  
+  
+  /* Optional More About Me Section */
+  .more-about {
+    margin-top: 40px;
+    text-align: center;
+  }
+  
+  .more-about h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .more-about p {
+    font-size: 16px;
+    color: #555;
+  }
+
+
+  @media (max-width: 1024px) {
+    .image-item img {
+      width: 27rem;
+      height: 27rem;
+    }
+    .about-card {
+      width: 250px;
+      padding: 15px;
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .image-item img {
+      width: 18rem;
+      height: 18rem;
+    }
+    .about-card {
+      width: 200px;
+      padding: 10px;
+      font-size: 0.8rem;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .image-item img {
+      width: 11rem;
+      height: 13rem;
+    }
+    .about-card {
+      width: 175px;
+      padding: 10px;
+      font-size: 0.75rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .image-item img {
+      width: 9rem;
+      height: 9rem;
+    }
+    .about-card {
+      width: 14rem;
+      padding: 10px;
+      font-size: 0.7rem;
+    }
+  }
+  
+.about-wrapper {
+  padding-left: 1rem;
+}
